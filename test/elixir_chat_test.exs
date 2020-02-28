@@ -26,7 +26,7 @@ defmodule ElixirChatTest do
 
   test "run ElxirChat with default name #2" do
     opts = []
-    ElixirChat.start_link(opts)
+    {:ok, _} = ElixirChat.start_link(opts)
 
     ElixirChat.send_message("message 2", opts)
 
@@ -38,7 +38,7 @@ defmodule ElixirChatTest do
 
   test "run ElxirChat with default name #3" do
     opts = []
-    ElixirChat.start_link(opts)
+    {:ok, _} = ElixirChat.start_link(opts)
 
     ElixirChat.send_message("message 3", opts)
 
@@ -50,7 +50,8 @@ defmodule ElixirChatTest do
 
   test "run ElxirChat with default name #4" do
     opts = []
-    ElixirChat.start_link(opts)
+    {:ok, _} = ElixirChat.start_link(opts)
+    |> IO.inspect(label: "what came back from start_link")
 
     ElixirChat.send_message("message 4", opts)
 

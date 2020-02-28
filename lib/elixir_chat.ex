@@ -33,7 +33,6 @@ defmodule ElixirChat do
   def init(initial_state) do
     {:ok, initial_state}
   end
-git 
 
   @impl true
   def handle_cast({:send_message, message}, current_state) do
