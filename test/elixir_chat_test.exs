@@ -1,7 +1,7 @@
 defmodule ElixirChatTest do
   use ExUnit.Case
   test "run ElxirChat with different name" do
-    opts = [name: :TestChat1]
+    opts = [name: :TestChat0]
     ElixirChat.start_link(opts)
 
     ElixirChat.send_message("message 1", opts)
@@ -13,8 +13,8 @@ defmodule ElixirChatTest do
   end
 
   test "run ElxirChat with default name" do
-    opts = []
-    ElixirChat.start_link(opts)
+    opts = [name: :TestChat1]
+    {:ok, _} = ElixirChat.start_link(opts)
 
     ElixirChat.send_message("message 1", opts)
 
@@ -25,7 +25,7 @@ defmodule ElixirChatTest do
   end
 
   test "run ElxirChat with default name #2" do
-    opts = []
+    opts = [name: :TestChat2]
     {:ok, _} = ElixirChat.start_link(opts)
 
     ElixirChat.send_message("message 2", opts)
@@ -37,7 +37,7 @@ defmodule ElixirChatTest do
   end
 
   test "run ElxirChat with default name #3" do
-    opts = []
+    opts = [name: :TestChat3]
     {:ok, _} = ElixirChat.start_link(opts)
 
     ElixirChat.send_message("message 3", opts)
@@ -49,7 +49,7 @@ defmodule ElixirChatTest do
   end
 
   test "run ElxirChat with default name #4" do
-    opts = []
+    opts = [name: :TestChat4]
     {:ok, _} = ElixirChat.start_link(opts)
     |> IO.inspect(label: "what came back from start_link")
 
