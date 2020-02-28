@@ -1,25 +1,31 @@
 defmodule ElixirChat do
   use GenServer
 
-  @chat_genserver_name :ElixirChat
-
   def start_link(opts \\ []) do
     name = get_name(opts)
     initial_state = []
     GenServer.start_link(__MODULE__, initial_state, name: name)
   end
 
-  def get_name(opts) do
-    Keyword.get(opts, :name, @chat_genserver_name)
+  def get_name(opts), do: Keyword.get(opts, :name, :default_room)
+
+  def ensure_started(name) do
+    case GenServer.whereis(name) do
+      nil -> {:ok, _} = ElixirChat.ChatSupervisor.start_child(name)
+      _pid -> name
+    end
+    name
   end
 
   def send_message(message, opts \\ []) do
     name = get_name(opts)
+    ensure_started(name)
     GenServer.cast(name, {:send_message, message})
   end
 
   def get_messages(opts \\ []) do
     name = get_name(opts)
+    ensure_started(name)
     GenServer.call(name, :get_messages)
   end
 

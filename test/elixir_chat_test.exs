@@ -60,4 +60,13 @@ defmodule ElixirChatTest do
 
     assert actual_messages == expected_messages
   end
+
+  test "sending messages to different rooms" do
+    ElixirChat.send_message("hello to default")
+    ElixirChat.send_message("hello to room 1", name: :room1)
+
+    expected_room1_messages = ["hello to room 1"]
+    actual_room1_messages = ElixirChat.get_messages(name: :room1)
+    assert actual_room1_messages == expected_room1_messages
+  end
 end

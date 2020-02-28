@@ -5,8 +5,8 @@ defmodule ElixirChat.Application do
   def start(_type, _args) do
     children = [
       %{
-        id: ElixirChat,
-        start: {ElixirChat, :start_link, []}
+        id: ElixirChat.ChatSupervisor,
+        start: {ElixirChat.ChatSupervisor, :start_link, []}
       }
     ]
     opts = [strategy: :one_for_one, name: ElixirChat.Application]
