@@ -14,8 +14,9 @@ defmodule ElixirChat.ChatSupervisor do
   end
 
   def start_child(chat_room_name, supervisor_opts \\ []) do
-    child_spec = %{id: ElixirChat, start: {ElixirChat, :start_link, [name: chat_room_name]}}
+    child_spec = %{id: ElixirChat, start: {ElixirChat, :start_link, [[name: chat_room_name]]}}
     supervisor_name = get_name(supervisor_opts)
+
     DynamicSupervisor.start_child(supervisor_name, child_spec)
   end
 end

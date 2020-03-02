@@ -1,7 +1,7 @@
 defmodule ElixirChat do
   use GenServer
 
-  def start_link(opts \\ []) do
+  def start_link(opts \\ []) when is_list(opts) do
     name = get_name(opts)
     initial_state = []
     GenServer.start_link(__MODULE__, initial_state, name: name)
@@ -11,10 +11,9 @@ defmodule ElixirChat do
 
   def ensure_started(name) do
     case GenServer.whereis(name) do
-      nil -> {:ok, _} = ElixirChat.ChatSupervisor.start_child(name)
+      nil -> {:ok, _pid} = ElixirChat.ChatSupervisor.start_child(name)
       _pid -> name
     end
-    name
   end
 
   def send_message(message, opts \\ []) do
